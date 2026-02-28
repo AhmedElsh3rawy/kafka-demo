@@ -2,6 +2,8 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.7.7
     container_name: kafka
+    networks:
+      - kafka-demo-net
     ports:
       - "9092:9092"
     environment:
@@ -18,3 +20,21 @@ services:
       KAFKA_LOG_DIRS: "/var/lib/kafka/data"
     volumes:
       - ./kafka-data:/var/lib/kafka/data
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.7.7
+    container_name: schema-registry
+    networks:
+      - kafka-demo-net
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka:29092"
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8081"
+
+networks:
+  kafka-demo-net:
+    driver: bridge
