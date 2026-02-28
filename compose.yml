@@ -54,6 +54,20 @@ services:
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
 
+  postgres:
+    image: postgres:16
+    container_name: kafka_db
+    networks:
+      - kafka-demo-net
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: user_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+
 networks:
   kafka-demo-net:
     driver: bridge
