@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "confluent-kafka>=2.13.0",
+    "confluent-kafka[avro]>=2.13.0",
     "faker>=40.5.1",
     "fastavro>=1.12.1",
     "psycopg2-binary>=2.9.11",
