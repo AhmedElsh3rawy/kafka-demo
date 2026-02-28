@@ -38,8 +38,17 @@ kafka-demo/
 
 - uv (Python package manager)
 - Docker and Docker Compose
+- Git
 
 ### Setup
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone <repository-url>
+```
+
+Follow these steps to set up and run the project:
 
 1. Install dependencies:
 
@@ -84,7 +93,7 @@ The consumer subscribes to the `users` topic, deserializes Avro messages, and in
 Connect to PostgreSQL:
 
 ```bash
-docker exec -it kafka_db psql -h localhost -U postgres -d user_db
+docker exec -it kafka_db psql -U postgres -d user_db
 ```
 
 Query the users table:
