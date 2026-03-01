@@ -42,25 +42,27 @@ kafka-demo/
 
 ### Setup
 
-Clone the repository and navigate to the project directory:
+1. Clone the repository and navigate to the project directory:
 
 ```bash
 git clone <repository-url>
+
+cd kafka-demo
 ```
 
-Follow these steps to set up and run the project:
-
-1. Install dependencies:
+2. Install dependencies:
 
 ```bash
 uv sync
 ```
 
-2. Start the infrastructure services:
+3. Start the infrastructure services:
 
 ```bash
 docker compose up -d
 ```
+
+The PostgreSQL container automatically runs `init-db/init.sql` on first startup, creating the `users` table.
 
 Wait a few seconds for Kafka to be fully ready.
 
@@ -118,3 +120,11 @@ docker compose down -v
 ```
 
 This removes all containers and volumes.
+
+## Troubleshooting
+
+- If you encounter permission issues with `kafka-data` volume just run:
+
+  ```bash
+  sudo chown -R $(id -u):$(id -g) ./kafka-data
+  ```
